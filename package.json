@@ -1,0 +1,21 @@
+{
+  "name": "techwondoe",
+  "version": "1.0.0",
+  "description": "Api's to add/get companies and teams",
+  "main": "index.ts",
+  "scripts": {
+    "start": "nodemon src/index.ts"
+  },
+  "author": "Samir Krishna Cholleti",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "postgresql": "0.0.1",
+    "typescript": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.4.0"
+  }
+}
