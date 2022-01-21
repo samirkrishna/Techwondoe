@@ -8,5 +8,5 @@ const companyController_1 = require("../controllers/companyController");
 const router = express_1.default.Router();
 router.post("/", companyController_1.createCompany);
 router.get("/", companyController_1.getCompanyById);
-router.get('/:companyName', companyController_1.searchCompanyByName);
+router.get("/:companyName", companyController_1.searchCompanyByName);
 exports.default = router;

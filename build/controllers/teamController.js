@@ -22,16 +22,21 @@ const createTeamByCompanyId = (req, res) => {
     const { name } = req.body;
     if (!name) {
         return res.status(406).json({
-            "message": "Request body missing"
+            message: "Request body missing"
         });
     }
-    const uuid = (0, uuid_1.v4)();
-    index_1.pool.query('INSERT INTO team (UUID,companyID,leadName) VALUES ($1,$2,$3)', [uuid, companyId, name], (error, results) => {
-        if (error) {
-            return res.sendStatus(500);
-        }
-        return res.status(201).send({ "successMessage": `${name} created successfully ` });
-    });
+    try {
+        const uuid = (0, uuid_1.v4)();
+        index_1.pool.query("INSERT INTO team (UUID,companyID,leadName) VALUES ($1,$2,$3)", [uuid, companyId, name], (error, results) => {
+            if (error) {
+                return res.sendStatus(500);
+            }
+            return res.status(201).send({ successMessage: `${name} created successfully ` });
+        });
+    }
+    catch (error) {
+        return res.sendStatus(500);
+    }
 };
 exports.createTeamByCompanyId = createTeamByCompanyId;
 const getAllTeams = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -42,7 +47,7 @@ const getAllTeams = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             for (let index = 0; index < companies.length; index++) {
                 let company = companies[index];
                 let companyId = company.uuid;
-                const teams = yield index_1.pool.query('SELECT * FROM team WHERE companyID=$1', [companyId]);
+                const teams = yield index_1.pool.query("SELECT * FROM team WHERE companyID=$1", [companyId]);
                 company.teams = teams.rows;
                 resp.push(company);
             }
@@ -59,7 +64,7 @@ const getAllTeams = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 exports.getAllTeams = getAllTeams;
 const getCompanies = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const companies = yield index_1.pool.query('SELECT * FROM company', []);
+        const companies = yield index_1.pool.query("SELECT * FROM company", []);
         return companies.rows;
     }
     catch (error) {
