@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon src/index.ts",
     "build": "rimraf build && tsc",
-    "start": "node index.js",
+    "start": "node build/index.js",
     "tslint": "tslint --project tsconfig.json"
   },
   "author": "Samir Krishna Cholleti",
