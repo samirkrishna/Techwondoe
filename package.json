@@ -4,22 +4,31 @@
   "description": "Api's to add/get companies and teams",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "build": "rimraf build && tsc",
+    "start": "node index.js",
+    "tslint": "tslint --project tsconfig.json"
   },
   "author": "Samir Krishna Cholleti",
   "license": "ISC",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^14.2.0",
     "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^8.7.1",
     "postgresql": "0.0.1",
     "typescript": "^4.5.4",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.2",
     "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
     "@types/pg": "^8.6.4",
     "@types/uuid": "^8.3.4",
     "nodemon": "^2.0.15",
-    "ts-node": "^10.4.0"
+    "ts-node": "^10.4.0",
+    "tslint": "^6.1.3"
   }
 }

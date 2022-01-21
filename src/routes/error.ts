@@ -1,8 +1,7 @@
-import express, { Request, Response } from 'express';
-const router = express.Router();
+import { Request, Response } from "express";
 
 export function error(req: Request, res: Response) {
-    res.status(404).json({
-        "errorMessage": "Requested page not found"
-    })
+  res.status(404).json({
+    errorMessage: "Requested page not found"
+  });
 }

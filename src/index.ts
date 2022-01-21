@@ -1,34 +1,35 @@
-import express, { Application, Request, Response } from 'express';
-import companyRoutes from './routes/companyRoutes'
-import teamRoutes from './routes/teamRoutes'
-import { error } from './routes/error'
+import express, { Application } from "express";
+import companyRoutes from "./routes/companyRoutes";
+import teamRoutes from "./routes/teamRoutes";
+import tokenRoutes from "./routes/tokenRoutes";
+import { error } from "./routes/error";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 
-// const Pool = require('pg').Pool
+dotenv.config();
 
-import Pool from 'pg';
+import Pool from "pg";
+import { validateToken } from "./middlewares/auth";
 
 const app: Application = express();
 
-const PORT: Number = 8000;
+const PORT: Number = parseInt(String(process.env.PORT)) || 8000;
 
 export const pool = new Pool.Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'postgres',
-    password: 'password',
-    port: 5432,
-})
-console.log("inside index");
+  user: process.env.DB_USER,
+  host: process.env.HOST,
+  database: process.env.DATABASE,
+  password: process.env.PASSWORD,
+  port: parseInt(String(process.env.DB_PORT))
+});
 
+app.use(express.json());
+app.use(cookieParser());
+app.use("/api/v1/token", tokenRoutes);
+app.use("/api/v1/company", validateToken, companyRoutes);
+app.use("/api/v1/team", validateToken, teamRoutes);
 
-
-app.use(express.json())
-app.use("/api/v1/company", companyRoutes);
-app.use("/api/v1/team", teamRoutes);
-
-app.use(error)
+app.use(error);
 app.listen(PORT, (): void => {
-    console.log(`App is up and running ${PORT}`);
-})
-
-
+  console.log(`App is up and running ${PORT}`);
+});
