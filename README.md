@@ -10,7 +10,11 @@ A microservice app that provides apis to perform some basic company related oper
 2. Create a .env file in the root folder. And Add the following variables in the .env:
    a. PORT= PORT to run the application
    b. API_SECRET= SECRET Key to sign and validate JWT tokens
-   c. MONGODB_URL = For connecting to db. Ref point 3
+   c. DB_USER = Postgres username
+   d. HOST = Postgres host name
+   e. DATABASE = Postgres database name
+   e. PASSWORD = Postgres PASSWORD
+   e. DB_PORT = Postgres port number
    - Also check for the .env.sample for your reference
 3. For Database Connection (Postgres),
    1. If you want to connect with the local Postgres,
